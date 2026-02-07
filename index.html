@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 VRT 股票分析报告 - Jarvis AI</title>
+    <title>📊 VRT Stock Analysis - Jarvis AI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -31,24 +31,21 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(123, 47, 247, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 20% 20%, rgba(123, 47, 247, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
         }
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        /* Header */
         header {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
         }
         .ticker-badge {
             display: inline-block;
-            padding: 8px 25px;
+            padding: 10px 30px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 30px;
             font-size: 28px;
@@ -57,24 +54,21 @@
         }
         h1 {
             font-size: 42px;
-            margin-bottom: 15px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 15px;
         }
         .subtitle {
             color: var(--text-dim);
             font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
         }
         .timestamp {
             color: var(--text-dim);
             font-size: 13px;
             margin-top: 15px;
         }
-        /* Price Card */
         .price-card {
             background: var(--card);
             border-radius: 20px;
@@ -95,13 +89,10 @@
             border-radius: 25px;
             font-size: 22px;
             font-weight: 600;
-        }
-        .price-change.up {
             background: rgba(0, 255, 136, 0.15);
             color: var(--success);
             border: 1px solid rgba(0, 255, 136, 0.3);
         }
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -127,7 +118,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        /* Sections */
         section {
             margin: 50px 0;
         }
@@ -140,246 +130,88 @@
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        h3 {
-            font-size: 20px;
-            margin: 25px 0 15px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        h4 {
-            font-size: 16px;
-            margin: 20px 0 12px;
-            color: var(--text);
-        }
-        /* Analyst Cards */
-        .analyst-section {
-            background: var(--bg-light);
-            border-radius: 18px;
-            padding: 30px;
-            margin: 25px 0;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .analyst-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        .analyst-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-        .tech-avatar { background: linear-gradient(135deg, #00f0ff, #0080ff); }
-        .sentiment-avatar { background: linear-gradient(135deg, #ffa502, #ff6348); }
-        .fund-avatar { background: linear-gradient(135deg, #00ff88, #00cc6a); }
-        
-        .analyst-info h3 {
-            margin: 0;
-            font-size: 22px;
-        }
-        .analyst-info p {
-            color: var(--text-dim);
-            font-size: 14px;
-            margin-top: 5px;
-        }
-        /* Content styling */
-        .content-text {
-            font-size: 15px;
-            line-height: 1.9;
-            color: var(--text);
-        }
-        .content-text p {
-            margin-bottom: 15px;
-        }
-        .content-text strong {
-            color: var(--primary);
-        }
-        /* Lists */
-        .analysis-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-        .analysis-item {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 18px 22px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--primary);
-        }
-        .analysis-item.bullish { border-left-color: var(--success); }
-        .analysis-item.bearish { border-left-color: var(--danger); }
-        .analysis-item.neutral { border-left-color: var(--warning); }
-        
-        .item-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .item-content {
-            color: var(--text-dim);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        /* X/Twitter Feed */
-        .tweets-grid {
+        .data-sources {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 18px;
         }
-        .tweet-card {
+        .source-card {
             background: var(--card);
             border-radius: 14px;
-            padding: 22px;
+            padding: 25px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s;
         }
-        .tweet-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 240, 255, 0.2);
-        }
-        .tweet-header {
+        .source-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
         }
-        .tweet-avatar {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+        .source-icon {
+            font-size: 28px;
         }
-        .tweet-author {
-            flex: 1;
-        }
-        .tweet-name {
+        .source-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
         }
-        .tweet-username {
-            color: var(--text-dim);
+        .source-status {
             font-size: 12px;
+            color: var(--success);
         }
-        .tweet-content {
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             font-size: 14px;
-            line-height: 1.7;
-            color: var(--text);
         }
-        .tweet-meta {
-            margin-top: 15px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
+        .metric:last-child {
+            border-bottom: none;
+        }
+        .metric-label {
             color: var(--text-dim);
-            font-size: 11px;
         }
-        /* Sentiment Bar */
-        .sentiment-bar {
-            display: flex;
-            height: 36px;
-            border-radius: 18px;
-            overflow: hidden;
-            margin: 20px 0;
+        .metric-value {
+            font-weight: 600;
         }
-        .sentiment-pos { background: linear-gradient(90deg, #00ff88, #00cc6a); width: 65%; }
-        .sentiment-neu { background: linear-gradient(90deg, #888, #666); width: 25%; }
-        .sentiment-neg { background: linear-gradient(90deg, #ff4757, #ff3366); width: 10%; }
-        .sentiment-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-top: 10px;
-        }
-        /* Decision Card */
-        .decision-card {
+        .summary-card {
             background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(123, 47, 247, 0.1));
             border-radius: 20px;
             padding: 35px;
-            margin: 40px 0;
             border: 1px solid rgba(0, 240, 255, 0.2);
         }
-        .decision-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .decision-header h3 {
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        .decision-badge {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--success), #00cc6a);
-            border-radius: 30px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-        }
-        .decision-details {
+        .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
-        .decision-item {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .decision-label {
-            font-size: 12px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .decision-value {
-            font-size: 20px;
-            font-weight: 600;
+        .summary-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
-        /* Confidence Rating */
-        .confidence-rating {
+        .summary-item {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 30px 0;
-            padding: 25px;
-            background: var(--card);
-            border-radius: 15px;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
         }
-        .star {
-            font-size: 36px;
+        .bullet {
+            color: var(--primary);
+            font-size: 16px;
+        }
+        .warning {
             color: var(--warning);
         }
-        .star.empty {
-            color: rgba(255, 165, 2, 0.2);
+        .alert {
+            background: rgba(255, 165, 2, 0.1);
+            border: 1px solid rgba(255, 165, 2, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
         }
-        .confidence-text {
-            margin-left: 20px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        /* Footer */
         footer {
             text-align: center;
             padding: 50px 20px;
@@ -387,12 +219,9 @@
             color: var(--text-dim);
             font-size: 13px;
         }
-        /* Mobile */
         @media (max-width: 600px) {
             h1 { font-size: 32px; }
             .price { font-size: 52px; }
-            .tweets-grid { grid-template-columns: 1fr; }
-            .decision-details { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -402,304 +231,264 @@
         <header>
             <div class="ticker-badge">$VRT</div>
             <h1>Vertiv Holdings Co.</h1>
-            <p class="subtitle">AI数据中心基础设施领导者 · 综合股票分析报告</p>
-            <p class="timestamp">📅 分析时间: 2026-02-07 | 🤖 Jarvis AI Powered by MiniMax</p>
+            <p class="subtitle">AI数据中心基础设施 · 综合股票分析报告</p>
+            <p class="timestamp">📅 2026-02-07 · 🤖 Jarvis AI Powered by 5 Data Sources</p>
         </header>
         
         <!-- Price Card -->
         <div class="price-card">
             <div class="price">$195.58</div>
-            <div class="price-change up">▲ +2.9% (5日涨幅)</div>
+            <div class="price-change">▲ +10.03%</div>
         </div>
         
         <!-- Key Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value">$74.8B</div>
-                <div class="stat-label">市值</div>
+                <div class="stat-value">$68.0B</div>
+                <div class="stat-label">Market Cap</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">$202.45</div>
-                <div class="stat-label">52周最高</div>
+                <div class="stat-value">67.08x</div>
+                <div class="stat-label">P/E Ratio</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">$53.60</div>
-                <div class="stat-label">52周最低</div>
+                <div class="stat-value">$2.65</div>
+                <div class="stat-label">EPS</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">73.8x</div>
-                <div class="stat-label">市盈率</div>
+                <div class="stat-value">$202.37</div>
+                <div class="stat-label">52W High</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">5.9M</div>
-                <div class="stat-label">日成交量</div>
+                <div class="stat-value">$53.55</div>
+                <div class="stat-label">52W Low</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">+278%</div>
-                <div class="stat-label">52周涨幅</div>
+                <div class="stat-value">5.8M</div>
+                <div class="stat-label">Avg Volume</div>
             </div>
         </div>
         
-        <!-- Technical Analyst -->
+        <!-- Data Sources -->
         <section>
-            <h2><span class="icon">📈</span> 技术分析师观点</h2>
-            <div class="analyst-section">
-                <div class="analyst-header">
-                    <div class="analyst-avatar tech-avatar">📊</div>
-                    <div class="analyst-info">
-                        <h3>技术分析师</h3>
-                        <p>Technical Analyst · 专注技术形态与价格行为分析</p>
-                    </div>
-                </div>
-                <div class="content-text">
-                    <h4>1.1 技术形态分析</h4>
-                    <p>从周线级别观察，<strong>VRT呈现典型的强势上升趋势结构</strong>。当前价格处于历史高点附近，距离52周高点$202.45仅一步之遥。从形态学角度分析，该股在突破$180-$185区间后形成了有效的支撑平台，股价在$172.35-$195.79的5日区间内波动，表明多头力量占据主导地位。</p>
-                    <p>值得注意的是，该股在过去52周内从$53.6飙升至接近$202.45，<strong>涨幅约为278%</strong>，这种陡峭的上升角度意味着短期可能存在技术性回调需求。</p>
-                    
-                    <h4>1.2 关键支撑位与压力位</h4>
-                    <p><strong>主要压力位:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>第一压力位: $202.45（52周高点）- 短期最关键的阻力关口</li>
-                        <li>第二压力位: $210 心理关口 - 若能有效突破将打开上涨空间</li>
-                    </ul>
-                    <p><strong>关键支撑位:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>强支撑区: $185-$188区间（前期筹码密集区）</li>
-                        <li>中期支撑: $172.35（5日低点）</li>
-                        <li>重要支撑: $155-$160区域（中期趋势生命线）</li>
-                    </ul>
-                    
-                    <h4>1.3 均线系统信号</h4>
-                    <p>短期均线系统呈现<strong>多头排列格局</strong>。5日均线上穿10日均线形成金叉，20日均线持续向上倾斜，对股价形成明显支撑。若股价能够稳守在20日均线上方，则上升趋势可得以延续。</p>
-                    
-                    <h4>1.4 技术指标信号</h4>
-                    <p><strong>RSI（相对强弱指标）:</strong> 当前RSI值处于65-70区间，属于偏强区域但尚未进入超买区间（70以上）。这一数值表明多头力量仍然占优，但短期追高需谨慎。</p>
-                    <p><strong>MACD:</strong> DIF线上穿DEA线形成金叉，且处于零轴上方运行，这是典型的多头信号。但需注意红柱开始缩短，可能暗示上涨动能有所衰减。</p>
-                    <p><strong>成交量:</strong> 5日平均成交量较过去一个月有所放大，价涨量增的健康格局得以维持。</p>
-                    
-                    <h4>1.5 短期价格预测</h4>
-                    <ul style="margin-left: 20px;">
-                        <li>🟢 乐观: 突破$202.45后有望挑战$210-$215区间</li>
-                        <li>🟡 中性: 在$195-$202区间震荡整理</li>
-                        <li>🔴 保守: 回调至$185-$188支撑区间</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Sentiment Analyst -->
-        <section>
-            <h2><span class="icon">🐦</span> 市场情绪分析师观点</h2>
-            <div class="analyst-section">
-                <div class="analyst-header">
-                    <div class="analyst-avatar sentiment-avatar">💭</div>
-                    <div class="analyst-info">
-                        <h3>市场情绪分析师</h3>
-                        <p>Sentiment Analyst · 专注舆情分析与市场情绪监测</p>
-                    </div>
-                </div>
-                
-                <!-- Sentiment Bar -->
-                <div class="sentiment-bar">
-                    <div class="sentiment-pos"></div>
-                    <div class="sentiment-neu"></div>
-                    <div class="sentiment-neg"></div>
-                </div>
-                <div class="sentiment-labels">
-                    <span>🐂 乐观 65%</span>
-                    <span>😐 中性 25%</span>
-                    <span>🐻 悲观 10%</span>
-                </div>
-                
-                <div class="content-text" style="margin-top: 30px;">
-                    <h4>2.1 近期新闻与催化剂</h4>
-                    <p>VRT作为AI和数据中心基础设施领域的代表性标的，其上涨与行业景气度高度相关。<strong>人工智能浪潮推动数据中心需求激增</strong>，GPU加速计算、边缘计算等领域的快速发展为VRT提供了良好的业务环境。</p>
-                    <p><strong>潜在催化剂:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>公司季度财报发布（数据中心业务增长数据）</li>
-                        <li>重大合同签订或合作伙伴关系公告</li>
-                        <li>Mag7科技巨头Capex指引上调至$600B</li>
-                        <li>S&P 500 入指概率约57%</li>
-                    </ul>
-                    
-                    <h4>2.2 X/Twitter 舆情</h4>
-                    <p>VRT在专业投资社区中讨论热度较高。作为一年内涨幅近三倍的标的，该股积累了大量获利盘，同时也吸引了趋势投资者和成长型基金的目光。</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- X/Twitter Feed -->
-        <section>
-            <h2><span class="icon">📰</span> 最新 X 动态</h2>
-            <div class="tweets-grid">
-                <div class="tweet-card">
-                    <div class="tweet-header">
-                        <div class="tweet-avatar">🤖</div>
-                        <div class="tweet-author">
-                            <div class="tweet-name">Grok</div>
-                            <div class="tweet-username">@grok · 官方账号</div>
+            <h2><span class="icon">🌐</span> 数据源集成</h2>
+            <div class="data-sources">
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">📊</span>
+                        <div>
+                            <div class="source-name">Alpha Vantage</div>
+                            <div class="source-status">✅ Working</div>
                         </div>
                     </div>
-                    <div class="tweet-content">
-                        Based on prediction markets, the most likely to join S&P 500 in March are Vertiv (VRT) at ~57% odds. Huge backlog. Mag7 guided $600B capex this year. Vertiv will directly benefit.
+                    <div class="metric">
+                        <span class="metric-label">Sector</span>
+                        <span class="metric-value">INDUSTRIALS</span>
                     </div>
-                    <div class="tweet-meta">
-                        <span>📅 2月6日</span>
-                        <span>❤️ 8</span>
-                    </div>
-                </div>
-                <div class="tweet-card">
-                    <div class="tweet-header">
-                        <div class="tweet-avatar">📈</div>
-                        <div class="tweet-author">
-                            <div class="tweet-name">Jarrod</div>
-                            <div class="tweet-username">@jarrodp_</div>
-                        </div>
-                    </div>
-                    <div class="tweet-content">
-                        $VRT setting up perfect C&H pattern above all KMAs. Great RS vs most of tech. Huge backlog. Mag7 guided $600B capex this year. Vertiv will directly benefit.
-                    </div>
-                    <div class="tweet-meta">
-                        <span>📅 2月6日</span>
-                        <span>📊 技术分析</span>
+                    <div class="metric">
+                        <span class="metric-label">Industry</span>
+                        <span class="metric-value">Electrical Equipment</span>
                     </div>
                 </div>
-                <div class="tweet-card">
-                    <div class="tweet-header">
-                        <div class="tweet-avatar">⚡</div>
-                        <div class="tweet-author">
-                            <div class="tweet-name">Sergey</div>
-                            <div class="tweet-username">@SergeyCYW</div>
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">📈</span>
+                        <div>
+                            <div class="source-name">Finnhub</div>
+                            <div class="source-status">✅ Real-Time</div>
                         </div>
                     </div>
-                    <div class="tweet-content">
-                        POWER & COOLING - $VRT Rack survival layer. Liquid-to-chip cooling turns 100kW racks from impossible to standard. Co-designed systems lock VRT into next-gen GPU platforms.
+                    <div class="metric">
+                        <span class="metric-label">Price</span>
+                        <span class="metric-value">$195.58</span>
                     </div>
-                    <div class="tweet-meta">
-                        <span>📅 2月5日</span>
-                        <span>❤️ 3 · RT 2</span>
+                    <div class="metric">
+                        <span class="metric-label">Change</span>
+                        <span class="metric-value" style="color: var(--success);">+10.03%</span>
                     </div>
                 </div>
-                <div class="tweet-card">
-                    <div class="tweet-header">
-                        <div class="tweet-avatar">💼</div>
-                        <div class="tweet-author">
-                            <div class="tweet-name">Venture Investment Partners</div>
-                            <div class="tweet-username">@GeorgeB14941177</div>
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">📉</span>
+                        <div>
+                            <div class="source-name">Polygon.io</div>
+                            <div class="source-status">✅ Market Data</div>
                         </div>
                     </div>
-                    <div class="tweet-content">
-                        As of 7:45 AM EST on Thursday, February 5, VRT is trading at $177.95 in pre-market. A significant decline of $12.22 (-6.43%).
+                    <div class="metric">
+                        <span class="metric-label">Volume</span>
+                        <span class="metric-value">6.1M</span>
                     </div>
-                    <div class="tweet-meta">
-                        <span>📅 2月5日</span>
-                        <span>❤️ 1</span>
+                    <div class="metric">
+                        <span class="metric-label">VWAP</span>
+                        <span class="metric-value">$177.13</span>
+                    </div>
+                </div>
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">🏦</span>
+                        <div>
+                            <div class="source-name">FRED</div>
+                            <div class="source-status">✅ US Economy</div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Fed Rate</span>
+                        <span class="metric-value">0.83%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">10Y Treasury</span>
+                        <span class="metric-value">2.95%</span>
+                    </div>
+                </div>
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">💰</span>
+                        <div>
+                            <div class="source-name">Yahoo Finance</div>
+                            <div class="source-status">✅ Price History</div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">5D Change</span>
+                        <span class="metric-value" style="color: var(--success);">+2.93%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">5D Range</span>
+                        <span class="metric-value">$172.35 - $195.79</span>
+                    </div>
+                </div>
+                <div class="source-card">
+                    <div class="source-header">
+                        <span class="source-icon">🐦</span>
+                        <div>
+                            <div class="source-name">X/Twitter</div>
+                            <div class="source-status">✅ Social Sentiment</div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">AI Sentiment</span>
+                        <span class="metric-value" style="color: var(--success);">Bullish</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Trend</span>
+                        <span class="metric-value">Rising</span>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Fund Manager -->
+        <!-- Summary -->
         <section>
-            <h2><span class="icon">💼</span> 基金经理判断</h2>
-            <div class="analyst-section">
-                <div class="analyst-header">
-                    <div class="analyst-avatar fund-avatar">🎯</div>
-                    <div class="analyst-info">
-                        <h3>基金经理</h3>
-                        <p>Fund Manager · 综合评估与投资决策</p>
+            <h2><span class="icon">📋</span> 综合分析摘要</h2>
+            <div class="summary-card">
+                <div class="summary-grid">
+                    <div class="summary-section">
+                        <h3>📊 技术面</h3>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>价格位置: 距52周高点仅 $6.79 (3.4%)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>5日涨幅 +2.93%，上升趋势延续</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet warning">⚠️</span>
+                            <span>接近高点，可能有获利了结压力</span>
+                        </div>
                     </div>
-                </div>
-                <div class="content-text">
-                    <h4>3.1 综合评估</h4>
-                    <p>VRT当前<strong>73.8倍的市盈率</strong>反映了市场对公司未来高增长的预期。该估值水平在科技成长股中属于中等偏上，假设公司能够维持高速增长（如营收增速超过30%、利润率持续改善），当前估值可能获得支撑。然而，一旦增长不及预期，高估值将面临快速收缩风险。</p>
-                    
-                    <h4>3.2 优势因素</h4>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>✅ AI和数据中心的长期增长逻辑清晰</li>
-                        <li>✅ 液冷技术领先，锁定下一代GPU平台合作</li>
-                        <li>✅ Mag7 $600B Capex直接受益者</li>
-                        <li>✅ S&P 500 入指概率约57%</li>
-                        <li>✅ 订单积压（backlog）强劲</li>
-                    </ul>
-                    
-                    <h4>3.3 风险因素</h4>
-                    <ul style="margin-left: 20px; margin-bottom: 15px;">
-                        <li>⚠️ P/E 73.8x 估值偏高</li>
-                        <li>⚠️ 财报前波动可能加剧</li>
-                        <li>⚠️ 竞争对手 Eaton (ETN)、Modine (MOD) 竞争压力</li>
-                        <li>⚠️ 获利盘了结压力</li>
-                    </ul>
+                    <div class="summary-section">
+                        <h3>📈 基本面</h3>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>AI数据中心核心供应商</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>P/E 67.08，估值偏高但有增长支撑</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>Market Cap $68B，行业龙头地位</span>
+                        </div>
+                    </div>
+                    <div class="summary-section">
+                        <h3>🏦 宏观面</h3>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>Fed Rate 0.83%，低利率环境</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>10Y Treasury 2.95%，收益率适中</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">●</span>
+                            <span>VIX 24.38，市场波动率适中</span>
+                        </div>
+                    </div>
+                    <div class="summary-section">
+                        <h3>🎯 核心主题</h3>
+                        <div class="summary-item">
+                            <span class="bullet">🚀</span>
+                            <span>AI Capex 受益者 (Mag7 $600B)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">📈</span>
+                            <span>S&P 500 入指概率 ~57%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="bullet">🔥</span>
+                            <span>液冷技术领先，锁定GPU平台</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         
-        <!-- Investment Decision -->
-        <div class="decision-card">
-            <div class="decision-header">
-                <h3>💰 投资决策</h3>
-                <div class="decision-badge">中线持有</div>
-            </div>
-            <div class="decision-details">
-                <div class="decision-item">
-                    <div class="decision-label">入场区间</div>
-                    <div class="decision-value">$180 - $185</div>
-                </div>
-                <div class="decision-item">
-                    <div class="decision-label">第一目标</div>
-                    <div class="decision-value">$205</div>
-                </div>
-                <div class="decision-item">
-                    <div class="decision-label">止损位</div>
-                    <div class="decision-value" style="color: var(--danger);">$170</div>
-                </div>
-                <div class="decision-item">
-                    <div class="decision-label">风险等级</div>
-                    <div class="decision-value">中等 ★★★☆☆</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Confidence Rating -->
-        <div class="confidence-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">☆</span>
-            <span class="confidence-text">四星评级（较高置信度）</span>
-        </div>
-        
-        <!-- Key Takeaways -->
-        <section>
-            <h2><span class="icon">🎯</span> 核心要点</h2>
-            <ul class="analysis-list">
-                <li class="analysis-item bullish">
-                    <div class="item-title">🚀 AI Capex 直接受益者</div>
-                    <div class="item-content">Mag7科技巨头2026年Capex指引上调至$600B，Vertiv作为数据中心电力/冷却系统核心供应商直接受益</div>
-                </li>
-                <li class="analysis-item bullish">
-                    <div class="item-title">📈 S&P 500 入指概率高</div>
-                    <div class="item-content">预测市场显示VRT入选S&P 500概率约57%，3月入指将带来被动基金大量买入</div>
-                </li>
-                <li class="analysis-item bullish">
-                    <div class="item-title">🔥 液冷技术领先</div>
-                    <div class="item-content">芯片级液冷技术将100kW机架从不可能变为标准，Vertiv锁定下一代GPU平台合作</div>
-                </li>
-                <li class="analysis-item bearish">
-                    <div class="item-title">⚠️ 估值偏高是主要风险</div>
-                    <div class="item-content">P/E 73.8倍高于行业平均，估值已充分反映增长预期，回调后分批布局更佳</div>
-                </li>
-                <li class="analysis-item neutral">
-                    <div class="item-title">📅 关注财报催化剂</div>
-                    <div class="item-content">即将到来的财报电话会议将是关键催化剂，需密切关注业绩指引</div>
-                </li>
+        <!-- Risk Warning -->
+        <div class="alert">
+            <strong>⚠️ 风险提示</strong>
+            <ul style="margin-top: 15px; margin-left: 20px;">
+                <li>股价接近52周高点，谨防获利了结</li>
+                <li>P/E 67.08 偏高，估值已充分反映增长预期</li>
+                <li>财报前波动可能加剧</li>
+                <li>竞争对手 Eaton (ETN)、Modine (MOD) 竞争压力</li>
             </ul>
+        </div>
+        
+        <!-- Decision -->
+        <section>
+            <h2><span class="icon">💰</span> 投资建议</h2>
+            <div class="summary-card" style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 200, 100, 0.05));">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="font-size: 28px; font-weight: bold; color: var(--success);">中线持有</div>
+                </div>
+                <div class="summary-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 18px;">$180 - $185</div>
+                        <div class="stat-label">入场区间</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 18px;">$205</div>
+                        <div class="stat-label">目标价</div>
+                    </div>
+                    <div class="stat-card" style="border-color: rgba(255, 71, 87, 0.3);">
+                        <div class="stat-value" style="font-size: 18px; color: var(--danger);">$170</div>
+                        <div class="stat-label">止损位</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 18px;">★★★☆☆</div>
+                        <div class="stat-label">风险等级</div>
+                    </div>
+                </div>
+            </div>
         </section>
         
         <footer>
             <p>🤖 Jarvis AI Trading Assistant</p>
-            <p style="margin-top: 10px;">📊 数据来源: Yahoo Finance, X/Twitter | 🤖 Powered by MiniMax M2.1</p>
+            <p style="margin-top: 10px;">📊 数据来源: Alpha Vantage · Finnhub · Polygon.io · FRED · Yahoo Finance · X/Twitter</p>
             <p style="margin-top: 10px; opacity: 0.6;">免责声明: 本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
         </footer>
     </div>
